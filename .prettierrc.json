@@ -1,0 +1,14 @@
+{
+	"semi": false,
+	"singleQuote": true,
+	"useTabs": false,
+	"trailingComma": "none",
+	"endOfLine": "crlf",
+	"printWidth": 130,
+	"plugins": [
+		"prettier-plugin-organize-imports",
+		"prettier-plugin-packagejson",
+		"prettier-plugin-css-order"
+	],
+	"cssDeclarationSorterOrder": "smacss"
+}
