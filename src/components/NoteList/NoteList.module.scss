@@ -21,11 +21,18 @@
   border-radius: 6px;
   background: #fffbe7;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
 
   &:hover,
   &.selected {
     background: #e6f0ff;
+  }
+
+  &:hover {
+    .deleteBtn,
+    .editBtn {
+      display: flex !important;
+    }
   }
 
   .noteContent {
@@ -39,21 +46,24 @@
       gap: 8px;
 
       .title {
+        @include common.ellipsis-text(1);
         flex: 1;
         font-weight: bold;
         font-size: 14px;
+        word-break: break-all;
       }
 
       .editBtn {
-        display: flex;
+        display: none;
         align-items: center;
         justify-content: center;
-        padding: 2px;
+
         border: none;
         border-radius: 3px;
         background: none;
         color: #888;
         cursor: pointer;
+        transition: all 0.2s;
 
         &:hover {
           background: #e8f5e8;
@@ -62,15 +72,16 @@
       }
 
       .deleteBtn {
-        display: flex;
+        display: none;
         align-items: center;
         justify-content: center;
-        padding: 2px;
+
         border: none;
         border-radius: 3px;
         background: none;
         color: #888;
         cursor: pointer;
+        transition: all 0.2s;
 
         &:hover {
           background: #ffebee;
@@ -80,14 +91,9 @@
     }
 
     .preview {
-      display: -webkit-box;
+      @include common.ellipsis-text(3);
       color: #888;
       font-size: 12px;
-      line-clamp: 3;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
   }
 }

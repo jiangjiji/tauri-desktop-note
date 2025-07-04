@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styles from './App.module.scss'
-import { initialNotes } from './common/noteData'
+import { getNoteContent, getNoteTitle, initialNotes } from './common/noteData'
 import NoteEditor from './components/NoteEditor/NoteEditor'
 import NoteList from './components/NoteList/NoteList'
 import SearchBar from './components/SearchBar/SearchBar'
@@ -15,7 +15,11 @@ function App() {
   const selectedNote = notes.find((note) => note.id === selectedId)
 
   const handleContentChange = (value: string) => {
-    setNotes(notes.map((note) => (note.id === selectedId ? { ...note, content: value } : note)))
+    setNotes(
+      notes.map((note) =>
+        note.id === selectedId ? { ...note, content: value, title: getNoteTitle(value), subtitle: getNoteContent(value) } : note
+      )
+    )
   }
 
   const handleSelectNote = (id: string) => {
@@ -44,10 +48,14 @@ function App() {
   }
 
   const handleAddNote = () => {
+    const content = '<h1>New Note</h1><p>Start editing your note...</p>'
+
+    
     const newNote = {
       id: Date.now().toString(),
-      title: 'New Note',
-      content: 'Start editing your note...',
+      title: getNoteTitle(content),
+      subtitle: getNoteContent(content),
+      content,
       createTime: new Date(),
       updateTime: new Date()
     }

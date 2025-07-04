@@ -19,3 +19,12 @@
     background-color: var(--tt-scrollbar-color);
   }
 }
+
+@mixin ellipsis-text($line: 1) {
+  display: -webkit-box;
+  line-clamp: $line;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -13,8 +13,9 @@ function SearchBar({ value, onChange, onAddNote }: SearchBarProps) {
       <div className={styles.searchInput}>
         <Search size={16} className={styles.searchIcon} />
         <input
+          id="search-input"
           type="text"
-          placeholder="搜索笔记标题 (Ctrl + F)"
+          placeholder="Search notes (Ctrl + F)"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           className={styles.input}
