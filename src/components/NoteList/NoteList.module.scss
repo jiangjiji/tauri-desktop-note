@@ -1,28 +1,90 @@
 .noteList {
   flex: 1;
-  overflow-y: auto;
   padding: 8px 0;
+  overflow-y: auto;
+
+  .groupTitle {
+    margin: 12px 8px 4px 8px;
+    color: #888;
+    font-size: 14px;
+  }
 }
 
 .noteItem {
-    padding: 10px 16px;
-    border-radius: 6px;
-    margin: 4px 8px;
-    cursor: pointer;
-    background: #fffbe7;
-    transition: background 0.2s;
+  display: flex;
+  align-items: flex-start;
+  margin: 8px;
+  padding: 10px 16px;
+  gap: 8px;
+  border-radius: 6px;
+  background: #fffbe7;
+  cursor: pointer;
+  transition: background 0.2s;
 
-    &:hover,
-    &.selected {
-      background: #e6f0ff;
-    }
+  &:hover,
+  &.selected {
+    background: #e6f0ff;
+  }
 
-    .title {
-      font-weight: bold;
+  .noteContent {
+    flex: 1;
+    min-width: 0;
+
+    .titleRow {
+      display: flex;
+      align-items: center;
       margin-bottom: 4px;
+      gap: 8px;
+
+      .title {
+        flex: 1;
+        font-weight: bold;
+      }
+
+      .editBtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2px;
+        border: none;
+        border-radius: 3px;
+        background: none;
+        color: #888;
+        cursor: pointer;
+
+        &:hover {
+          background: #e0e0e0;
+          color: #666;
+        }
+      }
+
+      .deleteBtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2px;
+        border: none;
+        border-radius: 3px;
+        background: none;
+        color: #888;
+        cursor: pointer;
+
+        &:hover {
+          background: #ffebee;
+          color: #d32f2f;
+        }
+      }
     }
+
     .preview {
-      font-size: 12px;
+      display: -webkit-box;
       color: #888;
+      font-size: 12px;
+      line-clamp: 2;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
+}

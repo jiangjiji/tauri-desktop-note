@@ -1,17 +1,27 @@
 .container {
   display: flex;
   height: 100vh;
-}
-.sidebar {
-  width: 300px;
-  background: #f7f7f7;
-  border-right: 1px solid #eee;
-  display: flex;
-  flex-direction: column;
-}
-.main {
-  flex: 1;
-  padding: 24px;
-  background: #fff;
-  overflow: auto;
+
+  .sidebar {
+    width: 300px;
+    background: #f7f7f7;
+    border-right: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+  }
+  .main {
+    flex: 1;
+    padding: 24px;
+    background: #fff;
+    overflow: auto;
+
+    .emptyState {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: #888;
+      font-size: 16px;
+    }
+  }
 } 

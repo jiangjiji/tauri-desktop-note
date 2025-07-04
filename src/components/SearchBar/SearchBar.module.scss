@@ -3,19 +3,37 @@
   align-items: center;
   padding: 8px;
   background: #f7f7f7;
-}
-.input {
-  flex: 1;
-  padding: 6px 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-.addBtn {
-  margin-left: 8px;
-  padding: 6px 12px;
-  background: #4f8cff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+
+  .searchInput {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .searchIcon {
+      position: absolute;
+      left: 10px;
+      color: #888;
+    }
+
+    .input {
+      flex: 1;
+      padding: 6px 10px 6px 32px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+  }
+
+  .addBtn {
+    margin-left: 8px;
+    padding: 6px 12px;
+    background: #4f8cff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 } 
