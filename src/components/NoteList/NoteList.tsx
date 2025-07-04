@@ -33,7 +33,7 @@ function NoteList({ notes, onSelect, selectedId, onEdit, onDelete }: NoteListPro
     <div className={styles.noteList}>
       {todayNotes.length > 0 && (
         <div>
-          <div className={styles.groupTitle}>今天</div>
+          <div className={styles.groupTitle}>Today</div>
           {todayNotes.map((note) => (
             <NoteListItem
               key={note.id}
@@ -48,7 +48,7 @@ function NoteList({ notes, onSelect, selectedId, onEdit, onDelete }: NoteListPro
       )}
       {lastWeekNotes.length > 0 && (
         <div>
-          <div className={styles.groupTitle}>上周</div>
+          <div className={styles.groupTitle}>Last Week</div>
           {lastWeekNotes.map((note) => (
             <NoteListItem
               key={note.id}
@@ -63,7 +63,7 @@ function NoteList({ notes, onSelect, selectedId, onEdit, onDelete }: NoteListPro
       )}
       {lastMonthNotes.length > 0 && (
         <div>
-          <div className={styles.groupTitle}>上个月</div>
+          <div className={styles.groupTitle}>Last Month</div>
           {lastMonthNotes.map((note) => (
             <NoteListItem
               key={note.id}

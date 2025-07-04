@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 body {
   --tt-toolbar-height: 44px;
@@ -10,12 +10,12 @@ body {
 }
 
 body {
-  font-family: "Inter", sans-serif;
-  color: var(--tt-theme-text);
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
   padding: 0;
+  color: var(--tt-theme-text);
+  font-style: normal;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
 }
 
 html,
@@ -31,12 +31,16 @@ body {
 }
 
 .tiptap.ProseMirror {
-  font-family: "DM Sans", sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .content-wrapper {
   height: calc(100% - var(--tt-toolbar-height));
   overflow-y: auto;
+  scrollbar-color: var(--tt-scrollbar-color) transparent;
+
+  /* Firefox scrollbar */
+  scrollbar-width: thin;
 
   &::-webkit-scrollbar {
     display: block;
@@ -48,27 +52,19 @@ body {
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: var(--tt-scrollbar-color);
     border-radius: 4px;
+    background-color: var(--tt-scrollbar-color);
   }
-
-  /* Firefox scrollbar */
-  scrollbar-width: thin;
-  scrollbar-color: var(--tt-scrollbar-color) transparent;
 }
 
 .simple-editor-content {
-  max-width: 640px;
   width: 100%;
-  margin: 0 auto;
-}
+  height: 100%;
 
-.simple-editor-content .tiptap.ProseMirror {
-  padding: 3rem 3rem;
-}
-
-@media screen and (max-width: 480px) {
-  .simple-editor-content .tiptap.ProseMirror {
-    padding: 1rem 1.5rem;
+  .ProseMirror {
+    contain: strict;
+    height: 100%;
+    padding: 20px 0;
   }
 }
+

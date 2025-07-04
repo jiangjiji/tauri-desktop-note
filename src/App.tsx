@@ -32,10 +32,10 @@ function App() {
     console.log('删除笔记:', id)
     const newNotes = notes.filter((note) => note.id !== id)
     setNotes(newNotes)
-    
+
     // 如果删除的是当前选中的笔记，选择下一个笔记
     if (selectedId === id && newNotes.length > 0) {
-      const currentIndex = notes.findIndex(note => note.id === id)
+      const currentIndex = notes.findIndex((note) => note.id === id)
       const nextIndex = currentIndex < newNotes.length ? currentIndex : currentIndex - 1
       setSelectedId(newNotes[nextIndex].id)
     } else if (newNotes.length === 0) {
@@ -43,13 +43,27 @@ function App() {
     }
   }
 
+  const handleAddNote = () => {
+    const newNote = {
+      id: Date.now().toString(),
+      title: 'New Note',
+      content: 'Start editing your note...',
+      createTime: new Date(),
+      updateTime: new Date()
+    }
+
+    setNotes([newNote, ...notes])
+    setSelectedId(newNote.id)
+    setSearch('') // 清空搜索，显示新笔记
+  }
+
   return (
     <div className={styles.container}>
       <aside className={styles.sidebar}>
-        <SearchBar value={search} onChange={setSearch} />
-        <NoteList 
-          notes={filteredNotes} 
-          onSelect={handleSelectNote} 
+        <SearchBar value={search} onChange={setSearch} onAddNote={handleAddNote} />
+        <NoteList
+          notes={filteredNotes}
+          onSelect={handleSelectNote}
           selectedId={selectedId}
           onEdit={handleEditNote}
           onDelete={handleDeleteNote}
@@ -60,7 +74,7 @@ function App() {
           <NoteEditor value={selectedNote.content} onChange={handleContentChange} />
         ) : (
           <div className={styles.emptyState}>
-            <p>请选择一个笔记开始编辑</p>
+            <p>None Note</p>
           </div>
         )}
       </main>
