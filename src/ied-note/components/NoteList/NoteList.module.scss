@@ -1,0 +1,118 @@
+@use '../../common/common' as common;
+
+.noteList {
+  @include common.scrollbar-common();
+  flex: 1;
+  padding: 6px 0;
+
+  .groupTitle {
+    margin: 12px 8px 4px 8px;
+    color: #888;
+    font-size: 12px;
+  }
+}
+
+.noteItem {
+  display: flex;
+  align-items: flex-start;
+  margin: 8px;
+  padding: 10px 16px;
+  gap: 8px;
+  border-radius: 6px;
+  background: #fffbe7;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover,
+  &.selected {
+    background: #e6f0ff;
+  }
+
+  &:hover {
+    .deleteBtn,
+    .editBtn,
+    .openWindowBtn {
+      display: flex !important;
+    }
+  }
+
+  .noteContent {
+    flex: 1;
+    min-width: 0;
+
+    .titleRow {
+      display: flex;
+      align-items: center;
+      margin-bottom: 4px;
+      gap: 8px;
+
+      .title {
+        @include common.ellipsis-text(1);
+        flex: 1;
+        font-weight: bold;
+        font-size: 14px;
+        word-break: break-all;
+      }
+
+      .editBtn {
+        display: none;
+        align-items: center;
+        justify-content: center;
+
+        border: none;
+        border-radius: 3px;
+        background: none;
+        color: #888;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+          background: #e8f5e8;
+          color: #4caf50;
+        }
+      }
+
+      .openWindowBtn {
+        display: none;
+        align-items: center;
+        justify-content: center;
+
+        border: none;
+        border-radius: 3px;
+        background: none;
+        color: #888;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+          background: #e6f0ff;
+          color: #1976d2;
+        }
+      }
+
+      .deleteBtn {
+        display: none;
+        align-items: center;
+        justify-content: center;
+
+        border: none;
+        border-radius: 3px;
+        background: none;
+        color: #888;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+          background: #ffebee;
+          color: #d32f2f;
+        }
+      }
+    }
+
+    .preview {
+      @include common.ellipsis-text(3);
+      color: #888;
+      font-size: 12px;
+    }
+  }
+}
