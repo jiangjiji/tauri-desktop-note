@@ -1,27 +1,42 @@
 import { WebviewWindow } from '@tauri-apps/api/webviewWindow'
 
-import { useState } from 'react'
-import styles from './App.module.scss'
-import { getNoteContent, getNoteTitle, initialNotes } from './common/noteData'
-import NoteEditor from './components/NoteEditor/NoteEditor'
-import NoteList from './components/NoteList/NoteList'
-import SearchBar from './components/SearchBar/SearchBar'
+import { useAsyncEffect } from 'ahooks'
+import React, { useState } from 'react'
+import ReactDOM from 'react-dom/client'
 
-function App() {
+import { getNewNote, getNoteContent, getNoteTitle, NoteData } from './common/data/noteData'
+import noteManager from './common/data/noteManager'
+import { registerHotkey } from './common/lib/hotkey'
+
+import NoteEditor from './components/note-editor/note-editor'
+import NoteList from './components/note-list/note-list'
+import SearchBar from './components/search-bar/search-bar'
+
+import styles from './note-manager.module.scss'
+
+function NoteManager() {
   const [search, setSearch] = useState('')
-  const [notes, setNotes] = useState(initialNotes)
+  const [notes, setNotes] = useState<NoteData[]>([])
   const [selectedId, setSelectedId] = useState(notes[0]?.id || '')
 
   const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(search.toLowerCase()))
 
   const selectedNote = notes.find((note) => note.id === selectedId)
 
-  const handleContentChange = (value: string) => {
+  useAsyncEffect(async () => {
+    const notes = await noteManager.loadNotes()
+    setNotes(notes)
+  }, [])
+
+  const handleContentChange = async (value: string) => {
     setNotes(
       notes.map((note) =>
         note.id === selectedId ? { ...note, content: value, title: getNoteTitle(value), subtitle: getNoteContent(value) } : note
       )
     )
+
+    console.log('更新笔记:', value)
+    if (selectedNote) await noteManager.saveNote(selectedNote)
   }
 
   const handleSelectNote = (id: string) => {
@@ -38,22 +53,17 @@ function App() {
     try {
       const note = notes.find((note) => note.id === id)
       if (note) {
-        // 暂时使用浏览器窗口来测试功能
-        // 后续会替换为Tauri原生窗口
-        const noteData = encodeURIComponent(
-          JSON.stringify({
-            id: note.id,
-            title: note.title,
-            content: note.content
-          })
-        )
-
-        const webview = new WebviewWindow('note', {
-          url: 'index-note.html',
-          x: 0,
-          y: 0,
-          width: 800,
-          height: 600
+        const webview = new WebviewWindow(`note-${id}`, {
+          url: `pages/index-note-widget.html?id=${id}`,
+          x: note.position.x,
+          y: note.position.y,
+          width: note.position.width,
+          height: note.position.height,
+          decorations: false,
+          transparent: true,
+          resizable: true,
+          shadow: false,
+          skipTaskbar: true
         })
 
         webview.once('tauri://error', function (e) {
@@ -65,8 +75,7 @@ function App() {
     }
   }
 
-  const handleDeleteNote = (id: string) => {
-    console.log('删除笔记:', id)
+  const handleDeleteNote = async (id: string) => {
     const newNotes = notes.filter((note) => note.id !== id)
     setNotes(newNotes)
 
@@ -78,23 +87,22 @@ function App() {
     } else if (newNotes.length === 0) {
       setSelectedId('')
     }
+
+    console.log('删除笔记:', id)
+    await noteManager.deleteNote(id)
   }
 
-  const handleAddNote = () => {
-    const content = '<h1>New Note</h1><p>Start editing your note...</p>'
-
-    const newNote = {
-      id: Date.now().toString(),
-      title: getNoteTitle(content),
-      subtitle: getNoteContent(content),
-      content,
-      createTime: new Date(),
-      updateTime: new Date()
-    }
+  const handleAddNote = async () => {
+    const newNote = getNewNote()
 
     setNotes([newNote, ...notes])
     setSelectedId(newNote.id)
     setSearch('') // 清空搜索，显示新笔记
+
+    console.log('添加笔记')
+    await noteManager.saveNote(newNote)
+
+    handleOpenInWindow(newNote.id)
   }
 
   return (
@@ -123,5 +131,11 @@ function App() {
   )
 }
 
-export default App
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <NoteManager />
+  </React.StrictMode>
+)
+
+registerHotkey()
 

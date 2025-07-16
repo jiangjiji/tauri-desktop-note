@@ -1,5 +1,5 @@
 import { SimpleEditor } from '@/tiptap/components/tiptap-templates/simple/simple-editor'
-import styles from './NoteEditor.module.scss'
+import styles from './note-editor.module.scss'
 
 interface NoteEditorProps {
   value: string

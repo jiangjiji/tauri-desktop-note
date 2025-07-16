@@ -32,14 +32,14 @@ export default defineConfig(async () => ({
   },
   resolve: {
     alias: {
-      '@/tiptap': join(__dirname, 'src/ied-note/tiptap')
+      '@/tiptap': join(__dirname, 'src/tiptap')
     }
   },
   build: {
     rollupOptions: {
       input: {
-        main: join(__dirname, 'pages/index-note-manager.html'),
-        note: join(__dirname, 'pages/index-note.html')
+        noteManager: join(__dirname, 'pages/index-note-manager.html'),
+        noteWidget: join(__dirname, 'pages/index-note-widget.html')
       }
     }
   }

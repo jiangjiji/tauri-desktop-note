@@ -1,6 +1,6 @@
-import { NoteData } from '../../common/noteData'
-import styles from './NoteList.module.scss'
-import NoteListItem from './NoteListItem'
+import { NoteData } from '../../common/data/noteData'
+import styles from './note-list.module.scss'
+import NoteListItem from './note-listItem'
 
 interface NoteListProps {
   notes: NoteData[]

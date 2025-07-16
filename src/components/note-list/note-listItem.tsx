@@ -1,6 +1,6 @@
-import { Edit, Trash2, ExternalLink } from 'lucide-react'
-import { NoteData } from '../../common/noteData'
-import styles from './NoteList.module.scss'
+import { Edit, ExternalLink, Trash2 } from 'lucide-react'
+import { NoteData } from '../../common/data/noteData'
+import styles from './note-list.module.scss'
 
 interface NoteListItemProps {
   note: NoteData
