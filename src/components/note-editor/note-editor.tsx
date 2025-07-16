@@ -2,14 +2,15 @@ import { SimpleEditor } from '@/tiptap/components/tiptap-templates/simple/simple
 import styles from './note-editor.module.scss'
 
 interface NoteEditorProps {
+  isWidget: boolean
   value: string
   onChange: (value: string) => void
 }
 
-function NoteEditor({ value, onChange }: NoteEditorProps) {
+function NoteEditor({ isWidget, value, onChange }: NoteEditorProps) {
   return (
     <div className={styles.editor}>
-      <SimpleEditor value={value} onChange={onChange} />
+      <SimpleEditor isWidget={isWidget} value={value} onChange={onChange} />
     </div>
   )
 }

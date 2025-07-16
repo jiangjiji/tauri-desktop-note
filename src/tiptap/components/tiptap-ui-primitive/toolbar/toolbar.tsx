@@ -7,7 +7,7 @@ import * as React from 'react'
 type BaseProps = React.HTMLAttributes<HTMLDivElement>
 
 interface ToolbarProps extends BaseProps {
-  variant?: 'floating' | 'fixed'
+  variant?: 'floating' | 'fixed' | 'fixed-widget'
 }
 
 const mergeRefs = <T,>(refs: Array<React.RefObject<T> | React.Ref<T> | null | undefined>): React.RefCallback<T> => {

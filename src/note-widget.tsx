@@ -122,13 +122,13 @@ function NoteWindow() {
       </header>
 
       <main className={styles.main}>
-        <NoteEditor value={note.content} onChange={handleContentChange} />
+        <NoteEditor isWidget={true} value={note.content} onChange={handleContentChange} />
       </main>
     </div>
   )
 }
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById('note-widget') as HTMLElement).render(
   <React.StrictMode>
     <NoteWindow />
   </React.StrictMode>

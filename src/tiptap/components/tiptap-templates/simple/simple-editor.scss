@@ -36,6 +36,7 @@ body {
 
 .content-wrapper {
   height: calc(100% - var(--tt-toolbar-height));
+  padding: 0 16px;
   overflow-y: auto;
   scrollbar-color: var(--tt-scrollbar-color) transparent;
 
@@ -66,4 +67,3 @@ body {
     padding: 16px 0;
   }
 }
-

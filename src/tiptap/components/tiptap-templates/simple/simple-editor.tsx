@@ -53,7 +53,6 @@ import { LinkIcon } from '@/tiptap/components/tiptap-icons/link-icon'
 
 // --- Hooks ---
 import { useCursorVisibility } from '@/tiptap/hooks/use-cursor-visibility'
-import { useMobile } from '@/tiptap/hooks/use-mobile'
 import { useWindowSize } from '@/tiptap/hooks/use-window-size'
 
 // --- Components ---
@@ -152,8 +151,15 @@ const MobileToolbarContent = ({ type, onBack }: { type: 'highlighter' | 'link'; 
   </>
 )
 
-export function SimpleEditor({ value, onChange }: { value: string; onChange: (value: string) => void }) {
-  const isMobile = useMobile()
+export function SimpleEditor({
+  isWidget,
+  value,
+  onChange
+}: {
+  isWidget: boolean
+  value: string
+  onChange: (value: string) => void
+}) {
   const windowSize = useWindowSize()
   const [mobileView, setMobileView] = React.useState<'main' | 'highlighter' | 'link'>('main')
   const toolbarRef = React.useRef<HTMLDivElement>(null)
@@ -203,10 +209,10 @@ export function SimpleEditor({ value, onChange }: { value: string; onChange: (va
   })
 
   React.useEffect(() => {
-    if (!isMobile && mobileView !== 'main') {
-      setMobileView('main')
-    }
-  }, [isMobile, mobileView])
+    // if (!isWidget && mobileView !== 'main') {
+    //   setMobileView('main')
+    // }
+  }, [isWidget, mobileView])
 
   React.useEffect(() => {
     if (editor && value !== editor.getHTML()) {
@@ -218,21 +224,12 @@ export function SimpleEditor({ value, onChange }: { value: string; onChange: (va
 
   return (
     <EditorContext.Provider value={{ editor }}>
-      <Toolbar
-        ref={toolbarRef}
-        style={
-          isMobile
-            ? {
-                bottom: `calc(100% - ${windowSize.height - bodyRect.y}px)`
-              }
-            : {}
-        }
-      >
+      <Toolbar ref={toolbarRef} variant={isWidget ? 'fixed-widget' : 'fixed'}>
         {mobileView === 'main' ? (
           <MainToolbarContent
             onHighlighterClick={() => setMobileView('highlighter')}
             onLinkClick={() => setMobileView('link')}
-            isMobile={isMobile}
+            isMobile={false}
           />
         ) : (
           <MobileToolbarContent

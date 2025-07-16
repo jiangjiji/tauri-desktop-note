@@ -120,7 +120,7 @@ function NoteManager() {
       </aside>
       <main className={styles.main}>
         {selectedNote ? (
-          <NoteEditor value={selectedNote.content} onChange={handleContentChange} />
+          <NoteEditor isWidget={false} value={selectedNote.content} onChange={handleContentChange} />
         ) : (
           <div className={styles.emptyState}>
             <p>None Note</p>
