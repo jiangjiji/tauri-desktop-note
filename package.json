@@ -14,7 +14,7 @@
     "@tauri-apps/api": "^2.6.0",
     "@tauri-apps/plugin-fs": "~2.4.0",
     "@tauri-apps/plugin-opener": "^2.4.0",
-    "@tiptap/extension-highlight": "^3.0.1",
+    "@tiptap/extension-highlight": "^3.5.3",
     "@tiptap/extension-image": "^3.0.1",
     "@tiptap/extension-link": "^3.0.1",
     "@tiptap/extension-subscript": "^3.0.1",
